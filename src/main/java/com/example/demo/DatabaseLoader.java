@@ -13,9 +13,12 @@ public class DatabaseLoader  implements CommandLineRunner {
     private final MovieRepository movierepository;
     private final PromotionRepository promotionRepository;
     private final BuyMovieRepository buyMovieRepository;
+    private final DrinksRepository drinksrepository;
 
     @Autowired
-    public DatabaseLoader(TheshowRepository theshowRepository, EmployeeRepository employeeRepository,ComingSoonRepository comingSoonRepository,MovieRepository movierepository,PromotionRepository promotionRepository,BuyMovieRepository buyMovieRepository) {
+    public DatabaseLoader(TheshowRepository theshowRepository, EmployeeRepository employeeRepository,
+    ComingSoonRepository comingSoonRepository,MovieRepository movierepository,
+    PromotionRepository promotionRepository,BuyMovieRepository buyMovieRepository,DrinksRepository drinksrepository) {
 
         this.theshowRepository = theshowRepository;
         this.employeeRepository = employeeRepository;
@@ -23,6 +26,7 @@ public class DatabaseLoader  implements CommandLineRunner {
         this.movierepository = movierepository;
         this.promotionRepository = promotionRepository;
         this.buyMovieRepository = buyMovieRepository;
+        this.drinksrepository = drinksrepository;
     }
 
     @Override
@@ -51,6 +55,12 @@ public class DatabaseLoader  implements CommandLineRunner {
         this.buyMovieRepository.save(buy1);
         BuyMovie buy2 = new BuyMovie("B2","A Wrinkle in Time","Walt Disney Studios",245000,"Suremas","ComingSoon");
         this.buyMovieRepository.save(buy2);
+
+        Drinks drinks1 = new Drinks("โค๊ก : 30 บาท");
+        this.drinksrepository.save(drinks1);
+
+        Drinks drinks2 = new Drinks("เปปซี่ : 30 บาท");
+        this.drinksrepository.save(drinks2);
 
     }
 }
