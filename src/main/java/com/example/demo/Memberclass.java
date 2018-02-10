@@ -9,7 +9,8 @@ import lombok.Data;
 @Entity
 @Table(name="Memberclass")
 public class Memberclass {
-    @Id 
+    
+    private  @Id  @GeneratedValue Long Id;
     private String _class;
 
 

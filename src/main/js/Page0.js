@@ -85,11 +85,8 @@ constructor(props) {
       idBill: '',
       date: '',
       time:'',
-
       selectedBanks: 'No'
-
     }
-
 }
 componentDidMount() {
 		client({method: 'GET', path: '/api/comingSoons'}).done(response => {

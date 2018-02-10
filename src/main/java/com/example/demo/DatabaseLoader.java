@@ -14,11 +14,13 @@ public class DatabaseLoader  implements CommandLineRunner {
     private final PromotionRepository promotionRepository;
     private final BuyMovieRepository buyMovieRepository;
     private final DrinksRepository drinksrepository;
+    private final MemberclassRepository memberclassRepository;
 
     @Autowired
     public DatabaseLoader(TheshowRepository theshowRepository, EmployeeRepository employeeRepository,
     ComingSoonRepository comingSoonRepository,MovieRepository movierepository,
-    PromotionRepository promotionRepository,BuyMovieRepository buyMovieRepository,DrinksRepository drinksrepository) {
+    PromotionRepository promotionRepository,BuyMovieRepository buyMovieRepository,
+    DrinksRepository drinksrepository,MemberclassRepository memberclassRepository) {
 
         this.theshowRepository = theshowRepository;
         this.employeeRepository = employeeRepository;
@@ -27,6 +29,7 @@ public class DatabaseLoader  implements CommandLineRunner {
         this.promotionRepository = promotionRepository;
         this.buyMovieRepository = buyMovieRepository;
         this.drinksrepository = drinksrepository;
+        this.memberclassRepository = memberclassRepository;
     }
 
     @Override
@@ -61,6 +64,12 @@ public class DatabaseLoader  implements CommandLineRunner {
 
         Drinks drinks2 = new Drinks("เปปซี่ : 30 บาท");
         this.drinksrepository.save(drinks2);
+
+        Memberclass member1 = new Memberclass("First Class");
+        Memberclass member2 = new Memberclass("Premium Class");
+        this.memberclassRepository.save(member1);
+        this.memberclassRepository.save(member2);
+        
 
     }
 }

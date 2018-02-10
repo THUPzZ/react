@@ -6,6 +6,7 @@ var client = require('./client');var Amount = '0';
 var Amount = '0';
 var JSONDATA = {};
 var pushpage='';
+import Home from './Home';
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -93,6 +94,26 @@ export default class Member extends React.Component {
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////
 class Register2 extends React.Component {
+  constructor(){
+    super()
+    this.state = {memberclasses: []};
+    this.state = {
+      user:'',
+      pass:'',
+      cpass:'',
+      name:'',
+      tel:'',
+      selectedVegetable: 'Onion'
+  };
+  
+  }
+  componentDidMount() {
+		client({method: 'GET', path: '/api/memberclasses'}).done(response => {
+      this.setState({memberclasses: response.entity._embedded.memberclasses});
+     console.log(response);
+		});
+}
+
   renderToolbar() {
     return (
       <Ons.Toolbar>
@@ -110,38 +131,118 @@ class Register2 extends React.Component {
     this.props.showMenu();
   }
   getData(){
-    
     ons.notification.alert('บันทึก')
-  
-
   }
+  handleUserChange(e) {
+    this.setState({user: e.target.value});
+  }
+  handlePassChange(e) {
+    this.setState({pass: e.target.value});
+  }
+  handleCPassChange(e) {
+    this.setState({cpass: e.target.value});
+  }
+  handleNameChange(e) {
+    this.setState({name: e.target.value});
+  }
+  handleTelChange(e) {
+    this.setState({tel: e.target.value});
+  }
+  handleVegetablChange(memberclasses) {
+    this.setState({selectedVegetable: memberclasses});
+  }
+  /////////////////////////////////////////////////////////////////////////////////////////////
+
+  /////////////////////////////////////////////////////////////////////////////////////////////
+  renderCheckboxRow(row,c) {
+    return (
+      <Ons.ListItem key={row._class} tappable>
+        <label className='left'>
+          <Ons.Checkbox
+            inputId={`checkbox-${row.na_classme}`}
+            checked={row._class === this.state.selectedVegetable}
+            onChange={this.handleVegetablChange.bind(this, row._class)}
+          />
+        </label>
+        <label htmlFor={`checkbox-${row._class}`} className='center'>
+          {row._class}
+        </label>
+      </Ons.ListItem>
+    )
+  }
+ 
+  /////////////////////////////////////////////////////////////////////////////////////////////
   render() {
     return (
-      <Ons.Page renderToolbar={this.renderToolbar.bind(this)}>
-
+    <Ons.Page renderToolbar={this.renderToolbar.bind(this)}>
       <Ons.Card>
-        <p>
-          ชื่อภาพยนตร์ : 
-        </p>
-
-        <p>
-           ประเภทหนัง : 
-        </p>
-
-        <p>
-          ค่ายหนัง :
-        </p>
-
-       <p>
-          วันที่เข้าฉาย : 
-        </p>
-
-        <div style={{ textAlign: 'center' }}>
-          <Ons.Button onClick={this.getData.bind(this)}>บันทึก</Ons.Button>
-        </div>
-
-        </Ons.Card>
-      </Ons.Page>
+      <div style={{ textAlign: 'center' }}>
+          <Ons.List renderHeader={() => <Ons.ListHeader>Member</Ons.ListHeader>} />   
+          <p>
+            <Ons.Input
+              value={this.state.user}
+              onChange={this.handleUserChange.bind(this)}
+              modifier='underbar'
+              type='text'
+              float
+              placeholder='User' 
+              />
+          </p>
+          <p>
+            <Ons.Input
+              value={this.state.pass}
+              onChange={this.handlePassChange.bind(this)}
+              modifier='underbar'
+              type='password'
+              float
+              placeholder='Password' />
+          </p>
+          <p>
+            <Ons.Input
+              value={this.state.cpass}
+              onChange={this.handleCPassChange.bind(this)}
+              modifier='underbar'
+              type='password'
+              float
+              placeholder='ConfrimPassword' />
+          </p>
+          <p>
+            <Ons.Input
+              value={this.state.name}
+              onChange={this.handleNameChange.bind(this)}
+              modifier='underbar'
+              type='text'
+              float
+              placeholder='name-sername' />
+          </p>
+          <p>
+            <Ons.Input
+              value={this.state.tel}
+              onChange={this.handleTelChange.bind(this)}
+              modifier='underbar'
+              type='text'
+              float
+              placeholder='tell' />
+          </p>
+          
+          
+          <Ons.List
+         
+         dataSource={this.state.memberclasses}
+          renderHeader={() => <Ons.ListHeader>เลือกรายการภาพยนต์ที่มี</Ons.ListHeader>}
+          renderRow={this.renderCheckboxRow.bind(this)}
+          />
+          
+          
+          <p>
+            &emsp;&emsp;
+            <Ons.Button onClick={this.getData.bind(this)}>Register</Ons.Button>
+          </p>
+          
+          </div>
+      </Ons.Card>
+      
+    </Ons.Page>
     );
   }
 }
