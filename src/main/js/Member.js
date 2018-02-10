@@ -79,9 +79,9 @@ export default class Member extends React.Component {
               placeholder='Password' />
           </p>
          <p>
-            <Ons.Button onClick={this.handleClick.bind()}>Sign in</Ons.Button>
+            <Ons.Button onClick={this.handleClick.bind(this)}>Sign in</Ons.Button>
             &emsp;&emsp;
-            <Ons.Button onClick={this.handleClick1.bind()}>Register</Ons.Button>
+            <Ons.Button onClick={this.handleClick1.bind(this)}>Register</Ons.Button>
           </p>
           
           </div>

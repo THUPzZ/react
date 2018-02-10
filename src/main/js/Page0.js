@@ -94,7 +94,7 @@ constructor(props) {
 componentDidMount() {
 		client({method: 'GET', path: '/api/comingSoons'}).done(response => {
       this.setState({comingSoons: response.entity._embedded.comingSoons});
-     // console.log(response.entity._embedded.comingSoons);
+     console.log(response);
 		});
 }
  handleBanksChange(banks) {
