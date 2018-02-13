@@ -6,8 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+
+
 import javax.persistence.*;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
 
 @Data
@@ -15,29 +19,34 @@ import java.util.Date;
 
 public class Snack_and_Drink {
 
-	private @Id @GeneratedValue String Bill;
-	private String Drink;
-	private String Totaldrink;
-	private String Totalpricedrink;
-	private String Snack;
-	private String Totalsnack;
-	private String Totalpricesnack;
-	private String Totaldetail;
-	private String Billdate;
-	private String Billtime;
+	private @Id @GeneratedValue Long Bill;
+
+	@ManyToOne
+	private Drinks clickdrink;
+	@ManyToOne
+	private Snacks clicksnack;
+	private String totaldrink;
+
+	private String pricedrink;
+		
+	private String totalsnack;
+	private String pricesnack;
+	private String totalprice;
+	private Date billdate; 
+	
 
 	private Snack_and_Drink() {}
 
-	public Snack_and_Drink(String Bill, String Drink, String Totaldrink, String Totalpricedrink, String Snack, String Totalsnack, String Totalpricesnack, String Totaldetail, String Billdate, String Billtime) {
-		this.Bill = Bill;
-		this.Drink = Drink;
-		this.Totaldrink = Totaldrink;
-		this.Totalpricedrink = Totalpricedrink;
-		this.Snack = Snack;
-		this.Totalsnack = Totalsnack;
-		this.Totalpricesnack = Totalpricesnack;
-		this.Totaldetail = Totaldetail;
-		this.Billdate = Billdate;
-		this.Billtime = Billtime;
+	public Snack_and_Drink(Drinks clickdrink, Snacks clicksnack,String totaldrink,String pricedrink,String totalsnack,String pricesnack,String totalprice,Date billdate) {
+	
+		this.clickdrink = clickdrink;
+		this.clicksnack = clicksnack;
+		this.totaldrink = totaldrink;
+		this.pricedrink = pricedrink;
+		this.totalsnack = totalsnack;
+		this.pricesnack = pricesnack;
+		this.totalprice = totalprice;
+		this.billdate = billdate;
+		 
 	}
 }

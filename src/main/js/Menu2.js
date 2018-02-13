@@ -11,10 +11,6 @@ var pushpage='';
 var num= [1,2,3,4,5,6,7,8,9];
 var camp;
 var name;
-var img;
-var URL = ["https://www.picz.in.th/images/2018/02/01/180131234401-7U36.png",
-"https://www.picz.in.th/images/2018/02/01/images.jpg"];
-////////////////////////////////////////////////////////////////////////////////
 class Status extends React.Component {
   renderToolbar() {
     return (
@@ -33,7 +29,7 @@ class Status extends React.Component {
     this.props.showMenu();
   }
   getData(){
-    client({method: 'GET', path:"/name/"+name+"/detail/"+detail+"/camp/"+camp+"/date/"+date+"/employee/"+Emplo}).done(
+    client({method: 'GET', path:"/name/"+name+"/detail/"+detail+"/camp/"+camp+"/date/"+date+"/employee/"+Emplo+"/id/"+id}).done(
     ons.notification.alert('บันทึก')
     );
 
@@ -52,7 +48,7 @@ class Status extends React.Component {
         </p>
 
         <p>
-          ค่ายหนัง :{camp}
+          ค่ายหนัง : {camp}
         </p>
 
        <p>
@@ -68,9 +64,10 @@ class Status extends React.Component {
     );
   }
 }
-var name;
-var Mid;
+
 ////////////////////////////////////////////////////////////////////////////////
+var name;
+var id;
 class Page extends React.Component {
     constructor(props) {
         super(props);
@@ -85,19 +82,19 @@ class Page extends React.Component {
     }
 }
 
-componentDidMount() {
+    componentDidMount() {
 		client({method: 'GET', path: '/api/buyMovies'}).done(response => {
 			this.setState({buyMovies: response.entity._embedded.buyMovies});
-		});
-}
+        });
+    }
  handleBanksChange(banks) {
     this.setState({selectedBanks: banks});
   }
   pushPage(event,event1) {
 //      ons.notification.alert('บันทึก');
-  Mid=event1;
+  id=event1;
    name = event;
-  this.props.navigator.pushPage({ component: Status, props: { key: 'Status' } });
+  this.props.navigator.pushPage({ component: Coming, props: { key: 'Coming' } });
  }
   renderRow(row,c) {
       return (
@@ -110,10 +107,10 @@ componentDidMount() {
          <img src= {URL[c]} style={{ width: '40%',height: '50%' }} /></span>
          <b style={{color: 'red' }}>
          <p>
-               &emsp;{row.namemovie}
+             &emsp; ชื่อภาพยนตร์ : {row.namemovie}
          </p>
 
-             </b>
+         </b>
        </div>
        <div className='center'>
 
@@ -156,11 +153,12 @@ return (
     );
   }
 }
+
+////////////////////////////////////////////////////////////////////////////////
 var camp;
 var detail;
 var date;
 var Emplo;
-////////////////////////////////////////////////////////////////////////////////
 class Coming extends React.Component {
   constructor(){
     super()
@@ -200,7 +198,7 @@ class Coming extends React.Component {
     camp=this.state.promov;
     date=this.state.date;
     Emplo=this.state.employee;
-    this.props.navigator.pushPage({ component: Page, props: { key: 'Page',state:this.state } });
+    this.props.navigator.pushPage({ component: Status, props: { key: 'Status',state:this.state } });
   }
   handleNameChange(e) {
     this.setState({name: e.target.value});
@@ -217,10 +215,10 @@ class Coming extends React.Component {
   handleDateChange(e) {
     this.setState({date: e.target.value});
   }
+
   handleEmployeeChange(e) {
     this.setState({employee: e.target.value});
   }
-
 
 
   renderCheckboxRow(row) {
@@ -248,7 +246,6 @@ class Coming extends React.Component {
         <div style={{ textAlign: 'left' }}>
          <div style={{ textAlign: 'center' }}>
 
-
           <br/>
           <Ons.List renderHeader={() => <Ons.ListHeader>ประเภทหนัง</Ons.ListHeader>} renderRow={this.renderCheckboxRow.bind(this)} />
             <Ons.Select id="choose-sel" value={this.state.fastival} fastival={this.state.fastival} onChange={this.handleFastivalChange.bind(this)}>
@@ -258,18 +255,18 @@ class Coming extends React.Component {
                     <option value="Animation">Animation</option>
                     <option value="Fantasy">Fantasy</option>
                     <option value="Mystery">Mystery</option>
-
                   </Ons.Select>
 
             <Ons.List renderHeader={() => <Ons.ListHeader>ค่ายหนัง</Ons.ListHeader>} renderRow={this.renderCheckboxRow.bind(this)} />
-            <Ons.Select id="choose-sel" value={this.state.promov} promov={this.state.promov} onChange={this.handlePromovChange.bind(this)}>
+              <Ons.Select id="choose-sel" value={this.state.promov} promov={this.state.promov} onChange={this.handlePromovChange.bind(this)}>
                     <option value=""></option>
                     <option value="Sony Pictures">Sony Pictures</option>
-                    <option value="Dreamwork">Dreamwork</option>
+                    <option value="Century Fox">Century Fox</option>
                     <option value="Columbia Pictures">Columbia Pictures</option>
                     <option value="Marvel">Marvel</option>
                     <option value="Walt Disney Pictures">Walt Disney Pictures</option>
-                   </Ons.Select>
+               </Ons.Select>
+
           <br/>
           <div>
           <br/>
@@ -323,18 +320,18 @@ export default class Menu2 extends React.Component {
   }
 
   PageAddmovie() {
-    this.props.navigator.pushPage({ component: Coming, props: { key: 'coming' } });
+    this.props.navigator.pushPage({ component: Page, props: { key: 'Page' } });
   }
 
 
   render() {
     return (
       <Ons.Page renderToolbar={this.renderToolbar.bind(this)}>
-      <img src={"https://media.giphy.com/media/3ohc1184GQthkb5SGQ/giphy.gif"}
+      <img src={"https://www.picz.in.th/images/2018/02/10/RJMC-4-Web-2.png"}
       style={{width: '100%'}}  />
         <div style={{ textAlign: 'center' }}>
           <br />
-           <Ons.Button onClick={this.PageAddmovie.bind(this)}>เพิ่มรายการภาพยนตร์</Ons.Button>
+           <Ons.Button onClick={this.PageAddmovie.bind(this)} modifier='large' >เพิ่มรายการภาพยนตร์</Ons.Button>
         </div>
       </Ons.Page>
       );

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+  //
 
 @Controller
 public class BillController  {
@@ -13,22 +14,25 @@ public class BillController  {
     BillRepository billRepository;
 
     //@Autowired
-   // EmployeeRepository employeeRepository;
+    //EmployeeRepository employeeRepository;
 
-   
+
+
     @ResponseBody
-    @RequestMapping(path = "'/name/{name}/aa/{gg}", method = RequestMethod.GET)
+    @RequestMapping(path = "/employee/{employee}/aa/{aa}/tell/{tell}/mov/{mov}",method = RequestMethod.GET)
+    public String saveReport(
+            @PathVariable String employee,
+            @PathVariable String aa,
+            @PathVariable String tell,
+            @PathVariable String mov
+    ){
 
 
-    public String saveRepository(@PathVariable String name,
-                                @PathVariable String gg){
-
-
-       // Employee employee = this.employeeRepository.findOne(g);
-        Bill bill = new Bill(name,gg);
+        //Employee employee = this.employeeRepository.findOne(employee);
+        Bill bill = new Bill(employee,aa,tell,mov);
         this.billRepository.save(bill);
 
 
-        return  "save";
+        return "saved";
     }
 }

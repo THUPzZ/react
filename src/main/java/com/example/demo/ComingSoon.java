@@ -10,12 +10,13 @@ import java.util.Date;
 @Entity
 public class ComingSoon {
 
-    @ManyToOne
-    private BuyMovie buyMovieID;
+
     @ManyToOne
     private Employee employee;
+    @ManyToOne
+    private BuyMovie buy;
 
-    private @Id String comingSoonID;
+    private @Id @GeneratedValue String comingSoonID;
     private String name;
     private String camp;
     private String detail;
@@ -23,12 +24,12 @@ public class ComingSoon {
 
     private ComingSoon() {}
 
-     ComingSoon(String comingSoonID,String name, String camp, String detail,Date date,Employee employee){
-        this.comingSoonID= comingSoonID;
+     ComingSoon(String name, String camp, String detail,Date date,Employee employee,BuyMovie buy){
         this.name = name;
         this.camp = camp;
         this.detail = detail;
         this.date = date;
         this.employee = employee;
+        this.buy = buy;
     }
 }

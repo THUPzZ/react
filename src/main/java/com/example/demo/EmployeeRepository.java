@@ -7,8 +7,8 @@ public interface EmployeeRepository extends CrudRepository<Employee, String> {
             @Param("employeeID") String employeeID,
             @Param("password") String password
     );
-
-    Employee findByEmployeeID(
+     Employee findByEmployeeID(
             @Param("employeeID") String employeeID
+           
     );
 }

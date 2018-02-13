@@ -1,8 +1,11 @@
 package com.example.demo;
 import javax.persistence.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import lombok.Data;
 import javax.validation.constraints.*;
+
 
 import lombok.Data;
 
@@ -12,16 +15,19 @@ import lombok.Data;
 public class Member {
 
     private @Id String userName;
+    @Size(min=8,max=12)
     private String pass;
+    @NotNull
     private String name;
+    @Pattern(regexp = "0\\d{9}")
     private String tel;
 
     @ManyToOne
     private Memberclass memberclass;
     
    
-    public Member(){}
-    public Member(String userName,String pass,String name,String tel,Memberclass memberclass){
+    private Member(){}
+     Member(String userName,String pass,String name,String tel,Memberclass memberclass){
         this.userName = userName;
         this.pass = pass;
         this.name = name;

@@ -4,13 +4,11 @@ import java.util.Date;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.Data;
-import javax.validation.constraints.*;
 @Data
 @Entity
 
 public class Employee {
     private @Id String employeeID;
-    @NotNull
     private String nameEmployee;
     private String password;
 

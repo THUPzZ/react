@@ -7,8 +7,62 @@ var Amount = '0';
 var JSONDATA = {};
 var pushpage='';
 import Home from './Home';
+import Zone from './Zone';
+import Test1 from './Test1';
+import Seat from './Seat';
+///////////////////////////////////////////////////////////////////////////////////////////////
+class Main extends React.Component {
+  renderToolbar() {
+    return (
+      <Ons.Toolbar>
+        <Ons.BackButton> Back</Ons.BackButton>
+          <div className='right'>
+          <Ons.ToolbarButton onClick={this.showMenu.bind(this)}>
+          <Ons.Icon icon='ion-navicon, material:md-menu' />
+          </Ons.ToolbarButton>
+        </div>
+      </Ons.Toolbar>
+  );
+}
 
+  showMenu() {
+    this.props.showMenu();
+  }
+  getPage(){
+    this.props.navigator.pushPage({ component: Seat , props: { key: 'Seat' } });
+  }
+  getPage1(){
+    this.props.navigator.pushPage({ component: Test1 , props: { key: 'Test1' } });
+  }
+  render() {
+    return (
+      <Ons.Page renderToolbar={this.renderToolbar.bind(this)}>
 
+      <Ons.Card>
+      <Ons.List renderHeader={() => <Ons.ListHeader>ชมภาพยนต์</Ons.ListHeader>} /> 
+      <br/> <br/> 
+      <div style={{ textAlign: 'center' }}>
+          <Ons.Button onClick={this.getPage1.bind(this)}>ซื้อตั๋วชมภาพยนต์</Ons.Button>
+      </div>
+      <br/> <br/> 
+      <Ons.List renderHeader={() => <Ons.ListHeader>เลือกที่นั่ง</Ons.ListHeader>} /> 
+      <br/> <br/> 
+        <div style={{ textAlign: 'center' }}>
+          <Ons.Button onClick={this.getPage.bind(this)}>ระบบจองตั๋วดูภาพยนต์</Ons.Button>
+        </div>
+        <br/> <br/> 
+        <Ons.List renderHeader={() => <Ons.ListHeader>โปรโมชั่น</Ons.ListHeader>} /> 
+        <br/> <br/> 
+        <div style={{ textAlign: 'center' }}>
+          <Ons.Button onClick={this.getPage.bind(this)}>ดูโปรโมชั่น</Ons.Button>
+        </div>
+        <br/> <br/> 
+
+        </Ons.Card>
+      </Ons.Page>
+    );
+  }
+}
 ////////////////////////////////////////////////////////////////////////////////
 export default class Member extends React.Component {
   constructor(){
@@ -32,12 +86,21 @@ export default class Member extends React.Component {
     );
   }
   handleClick() {
-    ons.notification.alert('บันทึก');
-   // this.props.navigator.pushPage({ component: Register , props: { key: 'Register' } });
+   
+   fetch('http://localhost:8080/api/members/search/findByUserNameAndPass?'+
+    'userName=' + this.state.username + '&pass=' + this.state.password)
+     .then((response)=> response.json())
+     .then((responseJson) => {
+      console.log(responseJson);
+      this.props.navigator.pushPage({ component: Main, props: { key: 'Main'} });
+     })
+     .catch((error) => {
+         ons.notification.alert('ไอดีหรือรหัสผิด');
+     })
+    
   }
   handleClick1() {
     this.props.navigator.pushPage({ component: Register2, props: { key: 'Register2'} });
-    
   }
 
   showMenu() {
@@ -92,6 +155,8 @@ export default class Member extends React.Component {
     );
   }
 }
+var num=[1,2,3,4,5,6,7,8,9];
+var testt;
 //////////////////////////////////////////////////////////////////////////////////////////////////
 class Register2 extends React.Component {
   constructor(){
@@ -103,12 +168,14 @@ class Register2 extends React.Component {
       cpass:'',
       name:'',
       tel:'',
-      selectedVegetable: 'Onion'
+      selectedVegetable: 'Onion', 
+      selectedVegetable1: 'Onion'
+      
   };
   
   }
   componentDidMount() {
-		client({method: 'GET', path: '/api/memberclasses'}).done(response => {
+		client({method: 'GET', path: '/api/memberclasses/'}).done(response => {
       this.setState({memberclasses: response.entity._embedded.memberclasses});
      console.log(response);
 		});
@@ -131,7 +198,14 @@ class Register2 extends React.Component {
     this.props.showMenu();
   }
   getData(){
-    ons.notification.alert('บันทึก')
+    if(this.state.pass==this.state.cpass){
+    client({method: 'POST', path:"/userName/"+this.state.user+"/pass/"+this.state.pass+"/name/"+this.state.name+"/tel/"+this.state.tel+"/memberclass/"+this.state.selectedVegetable}).done(
+      ons.notification.alert("บันทึกข้อมูลสำเร็จ")
+   );
+    }else{
+      ons.notification.alert("รหัสไม่ตรงกัน")
+    }
+    
   }
   handleUserChange(e) {
     this.setState({user: e.target.value});
@@ -151,21 +225,25 @@ class Register2 extends React.Component {
   handleVegetablChange(memberclasses) {
     this.setState({selectedVegetable: memberclasses});
   }
+ 
+  
   /////////////////////////////////////////////////////////////////////////////////////////////
 
   /////////////////////////////////////////////////////////////////////////////////////////////
   renderCheckboxRow(row,c) {
     return (
-      <Ons.ListItem key={row._class} tappable>
+      <Ons.ListItem key={row.idclass} tappable>
         <label className='left'>
           <Ons.Checkbox
-            inputId={`checkbox-${row.na_classme}`}
-            checked={row._class === this.state.selectedVegetable}
-            onChange={this.handleVegetablChange.bind(this, row._class)}
+            inputId={`checkbox-${row.idclass}`}
+            checked={row.idclass === this.state.selectedVegetable}
+            onChange={this.handleVegetablChange.bind(this,row.idclass)}
           />
         </label>
         <label htmlFor={`checkbox-${row._class}`} className='center'>
-          {row._class}
+          {row._class}<br/>
+         
+
         </label>
       </Ons.ListItem>
     )

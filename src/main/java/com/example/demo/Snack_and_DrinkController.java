@@ -17,23 +17,34 @@ public class Snack_and_DrinkController {
     
     @Autowired
     Snack_and_DrinkRepository snack_and_DrinkRepository;
+    @Autowired
+    DrinksRepository drinksRepository;
+    @Autowired
+    SnacksRepository snacksRepository;
 
     @ResponseBody
-    @RequestMapping(path = "/Bill/{Bill}/Drink/{Drink}/Totaldrink/{Totaldrink}/Totalpricedrink/{Totalpricedrink}/Snack/{Snack}/Totalsnack/{Totalsnack}/Totalpricesnack/{Totalpricesnack}/Totaldetail/{Totaldetail}/Billdate/{Billdate}/Billtime/{Billtime}",method = RequestMethod.GET)
+    @RequestMapping(path = "/clickdrink/{clickdrink}/clicksnack/{clicksnack}/totaldrink/{totaldrink}/pricedrink/{pricedrink}/totalsnack/{totalsnack}/pricesnack/{pricesnack}/totalprice/{totalprice}/billdate/{billdate}",method = RequestMethod.GET)
     public String saveReport(
-                             @PathVariable String Bill ,
-    						 @PathVariable String Drink,
-							 @PathVariable String Totaldrink,
-                             @PathVariable String Totalpricedrink,
-							 @PathVariable String Snack,
-							 @PathVariable String Totalsnack,
-							 @PathVariable String Totalpricesnack,
-							 @PathVariable String Totaldetail,
-							 @PathVariable String Billdate,
-							 @PathVariable String Billtime){                             
+                            
+    			@PathVariable String clickdrink,
+                        @PathVariable String clicksnack,
+			@PathVariable String totaldrink,
+                        @PathVariable String pricedrink,							
+			@PathVariable String totalsnack,
+			@PathVariable String pricesnack,
+			@PathVariable String totalprice,
+			@PathVariable String billdate){                             
+
+                     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                     Date d = new Date();
+                     try {
+                             d = formatter.parse(billdate);
+                    } catch (ParseException e) {
+                            e.printStackTrace();
+                     }
 
 
-        Snack_and_Drink snack_and_Drink = new Snack_and_Drink(Bill,Drink,Totaldrink,Totalpricedrink,Snack,Totalsnack,Totalpricesnack,Totaldetail,Billdate,Billtime);
+        Snack_and_Drink snack_and_Drink = new Snack_and_Drink(this.drinksRepository.findByDrinksname(clickdrink),this.snacksRepository.findBySnacksName(clicksnack),totaldrink,pricedrink,totalsnack,pricesnack,totalprice,d);
         this.snack_and_DrinkRepository.save(snack_and_Drink);
 
 

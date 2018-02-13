@@ -3,8 +3,6 @@ var ReactDOM = require('react-dom');
 var ons = require('onsenui');
 var Ons = require('react-onsenui');
 var client = require('./client');
-import Home from './Home';
-
 
 var a;
 var b;
@@ -52,11 +50,11 @@ class Bill extends React.Component {
   handleClick() {
   name = this.props.state.name
 
-
+  
     client({method: 'GET', path : '/name/'+name+'/aa/'+gg}).done(
         ons.notification.alert('ันทึกข้อมูล')
      );
-
+  
   }
 
   renderToolbar() {
@@ -87,7 +85,7 @@ class Bill extends React.Component {
       <Ons.Page renderToolbar={this.renderToolbar.bind(this)}>
        <Ons.Card>
         <p>
-          ชื่อคนเลือกเลขที่นั่ง : {aa}
+          ชื่อคนเลือกเลขที่นั่ง :
         </p>
         <p>
           ที่นั่ง :{aa}
@@ -423,7 +421,6 @@ export default class Menu6 extends React.Component {
         style={{ width: '100%' }} />
         <div style={{ textAlign: 'center' }}>
           <br />
-
           <Ons.Button onClick={this.pushPage.bind(this)}>
             WELLCOME
           </Ons.Button>
@@ -434,3 +431,4 @@ export default class Menu6 extends React.Component {
     );
   }
 }
+

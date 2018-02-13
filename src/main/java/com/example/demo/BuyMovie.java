@@ -16,24 +16,34 @@ import java.text.SimpleDateFormat;
 @Data
 @Entity
 public class BuyMovie {
-	private @Id String idmovie;
+	private @Id @GeneratedValue  Long id;
+	@ManyToOne
+	private Movie idmovie;
+	@ManyToOne
+    private Employee employee;
+
+
+	//@ManyToOne
+	//private Movie namemovie;
 	private String namemovie;
 	private String camp;
 	private Integer price;
-	private String name;
+	//private String name;
 	private String note;
 
 
 
 	private BuyMovie() {}
 
-	public BuyMovie(String idmovie,String namemovie,String camp,Integer price,String name,String note){
+	public BuyMovie(Movie  idmovie,String namemovie,String camp,Integer price,String note,Employee employee){
+
 		this.idmovie = idmovie;
 		this.namemovie = namemovie;
 		this.camp = camp;
 		this.price = price;
-		this.name = name;
+		//this.name = name;
 		this.note= note;
+		this.employee = employee;
 
 
 	}

@@ -18,14 +18,12 @@ class Billpro extends React.Component {
   );
 }
  handleClick() {
-   client({method: 'GET', path : '/name/'+name+'/fastival/'+fastival+'/promov/'+promov}).done(
+   client({method: 'GET', path : '/number/'+number+'/fastival/'+fastival+'/promov/'+promov+'/dateStart/'+dateStart+'/dateStop/'+dateStop+'/employeeID/'+employeeID}).done(
               ons.notification.alert('บันทึกสำเร็จ')
+             // console.log(employee)
          );
  }
 
-
-
-         
   showMenu() {
     this.props.showMenu();
   }
@@ -36,7 +34,7 @@ class Billpro extends React.Component {
 
       <Ons.Card>
         <p>
-          รหัสโปรโมชั่น : {this.props.state.name}
+          รหัสโปรโมชั่น : {this.props.state.number}
         </p>
 
         <p>
@@ -48,9 +46,14 @@ class Billpro extends React.Component {
         </p>
 
         <p>
-          วันเริ่มโปรโมชั่น : {this.props.state.date}
+          วันเริ่มโปรโมชั่น : {this.props.state.dateStart}
         </p>
-
+        <p>
+           วันสิ้นสุดโปรโมชั่น: {this.props.state.dateStop}
+         </p>
+        <p>
+           รหัสพนักงาน : {this.props.state.employee}
+        </p>
         <div style={{ textAlign: 'center' }}>
           <Ons.Button onClick = {this.handleClick.bind(this)}>ยืนยัน</Ons.Button>
         </div>
@@ -61,19 +64,23 @@ class Billpro extends React.Component {
   }
 }
 
-var name;
+var number;
 var fastival;
 var promov;
-var date;
+var dateStart;
+var dateStop;
+var employeeID;
 class StartPro extends React.Component {
   constructor(){
     super()
     this.state={
-      name: '',
-      detail: '',
-      date: '',
+      number: '',
+      dateStart: '',
+      dateStop: '',
       fastival : '',
-      promov :''
+      promov :'',
+      employee : ''
+
     }
   }
 
@@ -99,14 +106,16 @@ class StartPro extends React.Component {
   }
 
   Billpro() {
-        name = this.state.name
+        number = this.state.number
         fastival = this.state.fastival
         promov = this.state.promov
-        date = this.state.date
+        dateStart = this.state.dateStart
+        dateStop = this.state.dateStop
+        employeeID = this.state.employee
     this.props.navigator.pushPage({ component: Billpro, props: { key: 'billpro',state:this.state } });
   }
-  handleNameChange(e) {
-    this.setState({name: e.target.value});
+  handleNumberChange(e) {
+    this.setState({number: e.target.value});
   }
 
   handleFastivalChange(e) {
@@ -117,9 +126,15 @@ class StartPro extends React.Component {
     this.setState({promov: e.target.value});
   }
 
-  handleDateChange(e) {
-    this.setState({date: e.target.value});
+  handleDateStartChange(e) {
+    this.setState({dateStart: e.target.value});
   }
+   handleDateStopChange(e) {
+      this.setState({dateStop: e.target.value});
+  }
+   handleEmployeeChange(e) {
+        this.setState({employee: e.target.value});
+    }
 
 
 
@@ -149,11 +164,19 @@ class StartPro extends React.Component {
          <div style={{ textAlign: 'center' }}>
           <table style={{width:'100%'}}>
             <tr>
-              รหัสโปรโมชั่น:&emsp;&emsp;
-              <input style={{ width: '70%'}} type="text" value={this.state.name} onChange={this.handleNameChange.bind(this)} required />
+              รหัสโปรโมชั่น:&ensp;&ensp;
+              <input style={{ width: '70%'}} type="text" value={this.state.number} onChange={this.handleNumberChange.bind(this)} required />
             </tr>
           </table>
-          
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        <table style={{width:'100%'}}>
+            <tr>
+              รหัสพนักงาน:&ensp;&ensp;
+              <input style={{ width: '70%'}} type="text" value={this.state.employee} onChange={this.handleEmployeeChange.bind(this)} required />
+            </tr>
+        </table>
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
           <br/>
           <Ons.List renderHeader={() => <Ons.ListHeader>เทศกาล</Ons.ListHeader>} renderRow={this.renderCheckboxRow.bind(this)} />
             <Ons.Select id="choose-sel" value={this.state.fastival} fastival={this.state.fastival} onChange={this.handleFastivalChange.bind(this)}>
@@ -178,23 +201,39 @@ class StartPro extends React.Component {
           
          </div>
           <form >
-           <div>
-           <br/>
-              <label>วันที่เริ่มโปรโมชั่น:</label> &ensp;&ensp;&ensp;
-              &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+          <div>
+                <br/>
+                    <label>วันที่เริ่มโปรโมชั่น:</label> &ensp;&ensp;&ensp;
+                       &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
 
-              <div>
-               <input type="date"  value={this.state.date}
-                onChange={this.handleDateChange.bind(this)}/>
-                &ensp;&ensp;&ensp;
-                
-                
+                <div>
+                    <input type = "date"  value = {this.state.dateStart}
+                        onChange={this.handleDateStartChange.bind(this)}/>
+                        &ensp;&ensp;&ensp;
               </div>
+
             </div>
+
+            <div>
+                  <br/>
+                      <label>วันสิ้นสุดโปรโมชั่น:</label> &ensp;&ensp;&ensp;
+                           &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+
+                     <div>
+                         <input type = "date"  value = {this.state.dateStop}
+                            onChange={this.handleDateStopChange.bind(this)}/>
+                            &ensp;&ensp;&ensp;
+                  </div>
+
+            </div>
+
+
+
+
            <br/>
            <br/>
             <div style={{ textAlign: 'center' }}>
-              <Ons.Button value = {this.state.movie} onClick={this.Billpro.bind(this, Billpro)}>สร้างโปรโมชั่น </Ons.Button><br/><br/>
+              <Ons.Button value = {this.state.movie} onClick={this.Billpro.bind(this, Billpro)}>สร้างโปรโมชั่นใหม่ </Ons.Button><br/><br/>
             </div>
           </form>
         </div>
