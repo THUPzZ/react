@@ -10,13 +10,15 @@ import lombok.Data;
 @Table(name="Memberclass")
 public class Memberclass {
     
-    private  @Id  @GeneratedValue Long Id;
-    private String _class;
+   private  @Id  @GeneratedValue Long Id;
+   private String idclass;
+    private  String _class;
 
 
     private Memberclass(){}
-    Memberclass(String _class){
+    Memberclass(String _class,String idclass){
     this._class= _class;
+    this.idclass = idclass;
     
   
     }

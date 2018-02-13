@@ -7,8 +7,11 @@ var client = require('./client');
 class ReservationRoom3 extends React.Component {
   renderToolbar() {
     return (
-      <Ons.Toolbar>
+      <Ons.Toolbar style={{ backgroundColor: '		#ed9b7b' }}>
+      <div className='left'><Ons.BackButton>Back</Ons.BackButton></div>
+        <div className='center'>ระบบโรงภาพยนต์</div>
         <div className='right'>
+          
           <Ons.ToolbarButton onClick={this.showMenu.bind(this)}>
             <Ons.Icon icon='ion-navicon, material:md-menu' />
           </Ons.ToolbarButton>
@@ -30,11 +33,11 @@ class ReservationRoom3 extends React.Component {
       <Ons.Page renderToolbar={this.renderToolbar.bind(this)}>
       <div style={{ textAlign: 'left' }}>
          <div style={{ textAlign: 'center' }}>
-           <h1><b style={{color: 'blue'}}>บันทึกการซื้อภาพยนต์</b></h1>   
+           <h1><b style={{color: '#843540'}}>บันทึกการซื้อภาพยนต์</b></h1>   
       
            </div>
             </div>
-        <Ons.Card style={{backgroundColor:'#7fa884',width: '100%'}}>
+        <Ons.Card style={{backgroundColor:'#ddaf9d',width: '100%'}}>
         <tr>
           <td>
           </td>
@@ -42,13 +45,12 @@ class ReservationRoom3 extends React.Component {
           <center>
             <tr>
               <td>
-                <p> <b style={{color: 'blue'}}>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp; ชื่อภาพยนต์ :</b> <b style={{color: 'black'}}>&ensp;{namemovie}</b></p>
-                <p> <b style={{color: 'blue'}}>&ensp; &ensp;&ensp;&ensp;&ensp;&ensp; ราคา :</b><b style={{color: 'black'}}>&ensp;{price} THB</b></p>
-                <p> <b style={{color: 'blue'}}>&ensp; &ensp;&ensp;&ensp;&ensp;&ensp; รหัสหนัง : </b><b style={{color: 'black'}}>&ensp;{idmovie}</b></p>
-                <p> <b style={{color: 'blue'}}>&ensp; &ensp;&ensp;&ensp;&ensp;&ensp; ค่ายหนัง :</b><b style={{color: 'black'}}>&ensp;{camp}</b></p>
-                <p> <b style={{color: 'blue'}}>&ensp; &ensp;&ensp;&ensp;&ensp;&ensp; ค่ายหนัง :</b><b style={{color: 'black'}}>&ensp;{detail}</b></p>
-                 <p> <b style={{color: 'blue'}}> &ensp; &ensp;&ensp;&ensp;&ensp;&ensp; ชื่อพนักงาน:</b><b style={{color: 'black'}}>&ensp;{name}</b></p>
-                  <p> <b style={{color: 'blue'}}> &ensp; &ensp;&ensp;&ensp;&ensp;&ensp; หมายเหตุ:  </b><b style={{color: 'black'}}>&ensp;{note}</b></p>
+                <p> <b style={{color: '#843540'}}>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp; ชื่อภาพยนต์ :</b> <b style={{color: 'black'}}>&ensp;{namemovie}</b></p>
+                <p> <b style={{color: '##843540'}}>&ensp; &ensp;&ensp;&ensp;&ensp;&ensp; ราคา :</b><b style={{color: 'black'}}>&ensp;{price} THB</b></p>
+                <p> <b style={{color: '#843540'}}>&ensp; &ensp;&ensp;&ensp;&ensp;&ensp; รหัสหนัง : </b><b style={{color: 'black'}}>&ensp;{idmovie}</b></p>
+                <p> <b style={{color: '#843540'}}>&ensp; &ensp;&ensp;&ensp;&ensp;&ensp; ค่ายหนัง :</b><b style={{color: 'black'}}>&ensp;{camp}</b></p>
+                <p> <b style={{color: '#843540'}}>&ensp; &ensp;&ensp;&ensp;&ensp;&ensp; ค่ายหนัง :</b><b style={{color: 'black'}}>&ensp;{detail}</b></p>
+                <p> <b style={{color: '#843540'}}> &ensp; &ensp;&ensp;&ensp;&ensp;&ensp; หมายเหตุ:  </b><b style={{color: 'black'}}>&ensp;{note}</b></p>
               </td>
             </tr>
           </center>
@@ -73,21 +75,27 @@ class ReservationRoom3 extends React.Component {
 var name;
 var note;
 
+
 class ReservationRoom2 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '',
       note: ''
+     
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  
   }
   
   renderToolbar() {
     return (
-      <Ons.Toolbar>
+      <Ons.Toolbar style={{ backgroundColor: '		#ed9b7b' }}>
+      <div className='left'><Ons.BackButton>Back</Ons.BackButton></div>
+        <div className='center'>ระบบโรงภาพยนต์</div>
         <div className='right'>
+          
           <Ons.ToolbarButton onClick={this.showMenu.bind(this)}>
             <Ons.Icon icon='ion-navicon, material:md-menu' />
           </Ons.ToolbarButton>
@@ -108,7 +116,8 @@ class ReservationRoom2 extends React.Component {
  handleSubmit(event) {
    var data = {
        name: this.state.name,
-       note: this.state.note
+       note: this.state.note,
+      
    }
  }
 
@@ -123,8 +132,9 @@ class ReservationRoom2 extends React.Component {
   pushPage() {
     name=this.state.name
     note=this.state.note
+  
 
-    client({method: 'GET', path: '/idmovie/' + idmovie+'/namemovie/' + namemovie+'/camp/' + camp+'/price/' + price+'/name/' + name+'/note/' + note}).done(
+    client({method: 'GET', path: '/idmovie/' + idmovie+'/namemovie/' + namemovie+'/camp/' + camp+'/price/' + price+'/note/' + note+"/employee/"+name}).done(
       this.props.navigator.pushPage({ component: ReservationRoom3, props: { key: 'ReservationRoom3' } })
     );
   }
@@ -132,10 +142,10 @@ class ReservationRoom2 extends React.Component {
   render() {
     return (
       <Ons.Page renderToolbar={this.renderToolbar.bind(this)}>
-        <Ons.Card style={{backgroundColor:'#7fa884',width: '100%'}}>
+        <Ons.Card style={{backgroundColor:'#ddaf9d',width: '100%'}}>
          <div style={{ textAlign: 'left' }}>
          <div style={{ textAlign: 'center' }}>
-           <h1><b style={{color: 'blue'}}>ระบบซื้อภาพยนต์</b></h1>   
+           <h1><b style={{color: '#423635'}}>ระบบซื้อภาพยนต์</b></h1>   
           <center>
             <table style={{width:'50%'}}>
             <tr>
@@ -145,22 +155,27 @@ class ReservationRoom2 extends React.Component {
                   <div>
                     <form onSubmit={this.handleSubmit}>
                     <table style={{width:'100%'}}>
+                    
                     <tr>
-                      <b style={{color: 'blue'}}>ชื่อพนักงาน:&emsp;</b>
-                      <input style={{ width: '70%'}} type="text" value={this.state.name} onChange={this.handleChange('name')} required />
-                    </tr>
+                    <b style={{color: '#423635'}}>ID พนักงาน:&emsp;</b>
+                      <input style={{ width: '20%'}} type="text" value={this.state.name} onChange={this.handleChange('name')} required />
+                    </tr>                    
+                    
                     <tr>
-                      <b style={{color: 'blue'}}>หมายเหตุ:&emsp;&emsp;</b>
+                      <b style={{color: '#423635'}}>หมายเหตุ:&emsp;&emsp;</b>
                       <input style={{ width: '70%'}} type="text" value={this.state.note} onChange={this.handleChange('note')} required />
                     </tr>
+                    
+                  
                     </table>
                     </form>
                   </div>
                 </div>
               </td>
             </tr>
+           
             </table>
-            <Ons.Button onClick={this.pushPage.bind(this)}>ซื้อภาพยนต์</Ons.Button>
+            <Ons.Button onClick={this.pushPage.bind(this)} style={{ backgroundColor: '	black' }} >ซื้อภาพยนต์</Ons.Button>
           </center>
           </div>
           </div>
@@ -170,10 +185,10 @@ class ReservationRoom2 extends React.Component {
   }
 }
 
-var URL = ["https://www.picz.in.th/images/2018/01/26/black.jpg",
-"https://www.picz.in.th/images/2018/01/26/doctor-strange-1.jpg",
-"https://www.picz.in.th/images/2018/01/26/moana-fallback_fde4d101.jpg",
-"https://www.picz.in.th/images/2018/01/26/Fantastic-Beasts.jpg"];
+var URL = ["https://www.img.in.th/images/d3a5ef9b0bebb0f52eaeab81d5629c74.jpg",
+"https://www.img.in.th/images/12582954e9d75aa035f1da18cbb9fea5.jpg",
+"https://www.img.in.th/images/a2239b84468106df8a4eff05cb396788.jpg",
+"https://www.img.in.th/images/ac5e21e8a2f317545dabfba6dcb9a9bd.png"];
 var idmovie;
 var price;
 var namemovie;
@@ -189,8 +204,15 @@ class ReservationRoom1 extends React.Component {
 
   renderToolbar() {
     return (
-      <Ons.Toolbar>
-        <div className='left'><Ons.BackButton>Back</Ons.BackButton></div>
+      <Ons.Toolbar style={{ backgroundColor: '		#ed9b7b' }}>
+      <div className='left'><Ons.BackButton>Back</Ons.BackButton></div>
+        <div className='center'>ระบบโรงภาพยนต์</div>
+        <div className='right'>
+          
+          <Ons.ToolbarButton onClick={this.showMenu.bind(this)}>
+            <Ons.Icon icon='ion-navicon, material:md-menu' />
+          </Ons.ToolbarButton>
+        </div>
       </Ons.Toolbar>
     );
   }
@@ -221,7 +243,7 @@ class ReservationRoom1 extends React.Component {
   renderRow(row, c) {
     return (
         <Ons.List>
-        <div style={{width: '100%', backgroundColor: '#a8c4bf'}}>
+        <div style={{width: '100%', backgroundColor: '#ddaf9d'}}>
             <Ons.ListHeader></Ons.ListHeader>
       <Ons.ListItem key={row._links.self.href} tappable>
         <div className='left'>
@@ -238,7 +260,7 @@ class ReservationRoom1 extends React.Component {
             <p> <b style={{color: 'black'}}>ราคา :{row.price} THB </b> </p>
         </div>
         <div className='right'>
-          <Ons.Button style={{ margin: '6px', textAlign: 'right' }} onClick={this.pushPage.bind(this, row.namemovie, row.price, row.idmovie,row.camp, row.detail)}>Select</Ons.Button>
+          <Ons.Button style={{ margin: '6px', textAlign: 'right' }} onClick={this.pushPage.bind(this, row.namemovie, row.price, row.idmovie,row.camp, row.detail)}style={{ backgroundColor: '	#bc7c6f' }}>Select</Ons.Button>
         </div>
       </Ons.ListItem>
       </div>
@@ -251,7 +273,7 @@ class ReservationRoom1 extends React.Component {
       <Ons.Page renderToolbar={this.renderToolbar.bind(this)}>
          <div style={{ textAlign: 'left' }}>
          <div style={{ textAlign: 'center' }}>
-           <h1><b style={{color: 'blue'}}>รายชื่อหนัง</b></h1>   
+           <h1><b style={{color: '#544644'}}>รายชื่อหนัง</b></h1>   
       
            </div>
             </div>
@@ -267,8 +289,13 @@ class ReservationRoom1 extends React.Component {
 export default class Menu3 extends React.Component {
   renderToolbar() {
     return (
-      <Ons.Toolbar>
-        <div className='center'>  </div>
+      <Ons.Toolbar style={{ backgroundColor: '		#ed9b7b' }}>
+        <div className='center'>ระบบโรงภาพยนต์</div>
+        <div className='right'>
+          <Ons.ToolbarButton onClick={this.showMenu.bind(this)}>
+            <Ons.Icon icon='ion-navicon, material:md-menu' />
+          </Ons.ToolbarButton>
+        </div>
       </Ons.Toolbar>
     );
   }
@@ -284,11 +311,11 @@ export default class Menu3 extends React.Component {
   render() {
     return (
       <Ons.Page renderToolbar={this.renderToolbar.bind(this)}>
-      <img src={"https://www.picz.in.th/images/2018/01/25/1357217786-m2013JPG-o.jpg"}
+      <img src={"https://www.img.in.th/images/f7cb28f7ed980f7041b2fb814fca76ce.jpg"}
       style={{width: '100%'}}  />
         <div style={{ textAlign: 'center' }}>
           <br />
-         <Ons.Button onClick={this.pushPage.bind(this)} modifier='large' >ระบบซื้อภาพยนต์</Ons.Button>
+          <Ons.Button onClick={this.pushPage.bind(this)} style={{ backgroundColor: '	#ed9b7b' }} modifier='large' >ระบบซื้อภาพยนต์ภาพยนต์</Ons.Button>
         </div>
       </Ons.Page>
     );

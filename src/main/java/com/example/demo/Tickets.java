@@ -15,26 +15,25 @@ public class Tickets {
 	@GeneratedValue
 	@Id
 	private Long id;
-	@NotNull
+
 	@ManyToOne
 	private Theshow theshow;
-
 	@ManyToOne
 	private Member member;
-
-
-
-
-
-
-	private Date orderDate = new Date();
+	@ManyToOne
+	private Movie movie;
+	@NotNull @Min(70) @Max(500)
+	private Integer totalprice;
+	
 
 	private Tickets() {}
 
-	public Tickets(Theshow theshow,Member member) {
+	public Tickets(Theshow theshow,Movie movie,Member member,Integer totalprice) {
 
-		this.theshow = theshow;
-		this.member = member;
+		this.totalprice = totalprice;
+		this.movie =movie;
+		this.member=member;
+		this.theshow=theshow;
 	
 	
 	}

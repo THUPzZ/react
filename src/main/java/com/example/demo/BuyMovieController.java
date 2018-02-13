@@ -16,13 +16,26 @@ import java.util.concurrent.atomic.AtomicLong;
 public class BuyMovieController {
 
 	@Autowired
+    EmployeeRepository employeeRepository;
+    @Autowired
 	BuyMovieRepository buymovierepository;
+	@Autowired
+	MovieRepository movieRepository;
 
 	@ResponseBody
-	@RequestMapping(path = "/idmovie/{idmovie}/namemovie/{namemovie}/camp/{camp}/price/{price}/name/{name}/note/{note}", method = RequestMethod.GET)
-	public String BuyMovie(@PathVariable String idmovie,@PathVariable String namemovie,@PathVariable String camp,@PathVariable Integer price,@PathVariable String name,@PathVariable String note) {
-		BuyMovie buymovie = new BuyMovie(idmovie,namemovie,camp,price,name,note);
+	@RequestMapping(path = "/idmovie/{idmovie}/namemovie/{namemovie}/camp/{camp}/price/{price}/note/{note}/employee/{employeeID}", method = RequestMethod.GET)
+	public String BuyMovie(@PathVariable String idmovie
+	,@PathVariable String namemovie,
+	@PathVariable String camp,
+	@PathVariable Integer price,
+	@PathVariable String note, @PathVariable String employeeID) {
+
+		Employee employee = this.employeeRepository.findByEmployeeID(employeeID);
+		Movie movie = this.movieRepository.findByidmovie(idmovie);
+		BuyMovie buymovie = new BuyMovie(movie,namemovie,camp,price,note,employee);
 			this.buymovierepository.save(buymovie);
+
 		return "{\"status\":\"BuyMovie\"}";
+
 	}
 }

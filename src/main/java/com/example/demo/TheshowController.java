@@ -19,17 +19,20 @@ public class TheshowController {
     ComingSoonRepository comingSoonRepository;
     @Autowired
     TheshowRepository repository;
+    @Autowired
+    TheatreRepository theatreRepository;
 
     @ResponseBody
-    @RequestMapping(path = "/room/{room}/name/{name}/time/{time}/date/{date}/employee/{employeeID}/comingSoon/{comingSoonID}",method = RequestMethod.GET)
+    @RequestMapping(path = "/theatre/{theatreID}/name/{name}/time/{time}/date/{date}/employee/{employeeID}/comingSoon/{comingSoonID}",method = RequestMethod.GET)
     public String saveReport(
-                             @PathVariable String room,
+                             @PathVariable String theatreID,
                              @PathVariable String employeeID,
                              @PathVariable String comingSoonID,
                              @PathVariable String name,
                              @PathVariable String time,
                              @PathVariable String date){
         Employee employee = this.employeeRepository.findOne(employeeID);
+        Theatre theatre = this.theatreRepository.findOne(theatreID);
         ComingSoon comingSoon = this.comingSoonRepository.findOne(comingSoonID);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date d = new Date();
@@ -39,7 +42,7 @@ public class TheshowController {
             e.printStackTrace();
         }
 
-        Theshow theshow = new Theshow(room,name,time,d,employee,comingSoon);
+        Theshow theshow = new Theshow(name,time,d,employee,comingSoon,theatre,theatreID);
         this.repository.save(theshow);
 
 

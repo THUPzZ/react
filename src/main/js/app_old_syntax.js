@@ -4,7 +4,6 @@ var ons = require('onsenui');
 var Ons = require('react-onsenui');
 var client = require('./client');
 import Home from './Home';
-import Member from './Member';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 class ReactApp extends React.Component{
@@ -50,7 +49,7 @@ class ReactApp extends React.Component{
           </Ons.Page>
       </Ons.SplitterSide>
         <Ons.SplitterContent>
-          <Ons.Navigator initialRoute={{ component: Member, props: { key: 'Member' } }} renderPage={this.renderPage.bind(this)} ref={(navigator) => { this.navigator = navigator; }} />
+          <Ons.Navigator initialRoute={{ component: Home, props: { key: 'home' } }} renderPage={this.renderPage.bind(this)} ref={(navigator) => { this.navigator = navigator; }} />
         </Ons.SplitterContent>
       </Ons.Splitter>
     );
