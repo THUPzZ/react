@@ -314,7 +314,7 @@ handleClick() {
   client({method: 'POST', path:"/member/"+memberid+"/theshow/"+nums+"/seat/"+s+"/moviename/"+Na+"/room/"+Ta+"/namemem/"+U}).done(  
     ons.notification.alert(nums)
   );
-  client({method: 'POST', path:"/seatId/"+s+"/labal/"+s+"/status/"+"1"}).done(  
+  client({method: 'POST', path:"/seatId/"+s+"/labal/"+s+"/status/"+"2"}).done(  
     ons.notification.alert('Success')
   );
   

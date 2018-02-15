@@ -51,11 +51,9 @@ class Main extends React.Component {
           <Ons.Button onClick={this.getPage.bind(this)}>ระบบจองตั๋วดูภาพยนต์</Ons.Button>
         </div>
         <br/> <br/> 
-        <Ons.List renderHeader={() => <Ons.ListHeader>โปรโมชั่น</Ons.ListHeader>} /> 
+        <Ons.List renderHeader={() => <Ons.ListHeader></Ons.ListHeader>} /> 
         <br/> <br/> 
-        <div style={{ textAlign: 'center' }}>
-          <Ons.Button onClick={this.getPage.bind(this)}>ดูโปรโมชั่น</Ons.Button>
-        </div>
+        
         <br/> <br/> 
 
         </Ons.Card>
