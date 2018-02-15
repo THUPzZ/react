@@ -186,7 +186,7 @@ return (
             <Ons.Button onClick={this.pushPage8.bind(this)}  style={{margin: '6px'}} modifier='large'  >ระบบคืนภาพยนต์</Ons.Button>
             <Ons.Button onClick={this.pushPage9.bind(this)}  style={{margin: '6px'}} modifier='large'  >ระบบแจ้งซ่อมอุปกรณ์โรงภาพยนต์</Ons.Button>
             <Ons.List renderHeader={() => <Ons.ListHeader>For Member</Ons.ListHeader>} /> 
-            <Ons.Button onClick={this.pushPage6.bind(this)}  style={{margin: '6px'}} modifier='large'  >สมาชิก</Ons.Button>
+            <Ons.Button onClick={this.pushPage10.bind(this)}  style={{margin: '6px'}} modifier='large'  >สมาชิก</Ons.Button>
         </section>
       </Ons.Page>
     );

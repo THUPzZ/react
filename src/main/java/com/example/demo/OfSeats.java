@@ -9,7 +9,7 @@ import lombok.Data;
 @Entity
 @Table(name="OfSeats")
 public class OfSeats {
-    private @Id @GeneratedValue Long _ID;
+   
     @ManyToOne
     private Employee employee;
     @ManyToOne
@@ -17,7 +17,7 @@ public class OfSeats {
     @ManyToOne
     private Seat seat;
     
-    
+    private @Id @GeneratedValue Long _ID;
 
     private String moviename;
     private String room;

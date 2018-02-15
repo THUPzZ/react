@@ -58,6 +58,18 @@ public class DatabaseLoader  implements CommandLineRunner {
         this.employeeRepository.save(employee1);
         Employee employee2 = new Employee("1","theeraprased meemui","1");
         this.employeeRepository.save(employee2);
+        Employee employee3 = new Employee("EM01","Sureemard Somphong","1");
+        this.employeeRepository.save(employee3);
+        Employee employee4 = new Employee("fon","Jutamas Chankrua","1");
+        this.employeeRepository.save(employee4);
+        Employee employee5 = new Employee("khaimook","Anuchita Khaikla","1");
+        this.employeeRepository.save(employee5);
+        Employee employee6 = new Employee("may","titimaporn porka","1");
+        this.employeeRepository.save(employee6);
+        Employee employee7 = new Employee("j","jirateep  Kota ","1");
+        this.employeeRepository.save(employee7);
+        
+        
         /////////////////////////////////////////////////////////////////////////////////
 
 
@@ -80,6 +92,7 @@ public class DatabaseLoader  implements CommandLineRunner {
 
 
         this.memberRepository.save(new Member("thup","22346787","test","0933282267",null));
+        this.memberRepository.save(new Member("mook","22346787","chita","0999999999",null));
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////ที่นั่ง///////ที่นั่ง////////ที่นั่ง///////////ที่นั่ง/////////ที่นั่ง//////ที่นั่ง///////ที่นั่ง//////ที่นั่ง///////ที่นั่ง////////ที่นั่ง/////////////ที่นั่ง////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

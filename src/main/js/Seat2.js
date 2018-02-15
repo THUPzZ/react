@@ -15,7 +15,7 @@ export default class Seat2 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: props.title ? props.title : 'Wellcom ',
+      title: props.title ? props.title : 'ระบบเลือกที่นั่งดูภาพยนตร์ ',
       nextTitle: null
     };
   }
@@ -54,7 +54,7 @@ export default class Seat2 extends React.Component {
         </div>
         <div style={{ textAlign: 'center' }}>&emsp;&emsp;&emsp;&emsp;
         <Ons.Button onClick={this.pushPage.bind(this)}>
-          ระบบจองที่นั่งดูภาพยนตร์ชมภาพยนต์
+          Wellcom
           </Ons.Button>
         </div>
 
